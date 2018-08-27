@@ -22,7 +22,11 @@ public class Player {
     }
 
     public void addCard(int cardValue){
-        this.hand[0] = cardValue;
+        if (this.hand[0] == null){
+            this.hand[0] = cardValue;
+        } else if (this.hand[1] == null){
+            this.hand[1] = cardValue;
+        }
     }
 
 
