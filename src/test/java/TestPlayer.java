@@ -32,6 +32,14 @@ public class TestPlayer {
     }
 
     @Test
+    public void shouldBeAbleToRemoveCardFromHand() {
+        player1.addCard(5);
+        player1.removeCard(5);
+        Integer[] expected = new Integer[2];
+        assertArrayEquals(expected, player1.getHand());
+    }
+
+    @Test
     public void shouldBeAbleToAddTwoCardsToHand() {
         player1.addCard(1);
         player1.addCard(1);
@@ -61,13 +69,32 @@ public class TestPlayer {
     }
 
     @Test
-    public void shouldStartWithAnDiscardPile() {
+    public void shouldBeAbleToDiscardByCardValue() { }
+
+    @Test
+    public void shouldStartWithAnEmptyDiscardPile() {
         assertEquals(0, player1.getDiscardPileLength());
     }
 
     @Test
-    public void shouldBeAbleToAddToDiscardPile() {
-        player1.addToDiscardPile(1);
+    public void shouldAddCardToDiscardPileWhenCardIsDiscarded() {
+        player1.addCard(5);
+        player1.discard(0);
         assertEquals(1, player1.getDiscardPileLength());
     }
+
+    @Test
+    public void shouldAddCardToDiscardPileWhenCardIsPlayed() {
+        player1.addCard(5);
+        player1.playCard(5);
+        assertEquals(1, player1.getDiscardPileLength());
+    }
+
+//    @Test
+//    public void shouldRemoveCardFromHandWhenPlayed() {
+//        player1.addCard(5);
+//        player1.playCard(5);
+//        Integer[] expected = new Integer[2];
+//        assertArrayEquals(expected, player1.getHand());
+//    }
 }

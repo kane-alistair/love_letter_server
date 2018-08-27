@@ -34,14 +34,30 @@ public class Player {
     }
 
     public void discard(int index) {
-        this.hand[0] = null;
+        addToDiscardPile(index);
+        this.hand[index] = null;
     }
 
     public int getDiscardPileLength(){
         return this.discardPile.size();
     }
 
-    public void addToDiscardPile(int card) {
+    private void addToDiscardPile(int card) {
         this.discardPile.add(card);
+    }
+
+    public void playCard(int card) {
+        addToDiscardPile(card);
+    }
+
+    public void removeCard(int cardToRemove) {
+        for (int i = 0; i < this.hand.length; i++){
+            if (this.hand[i] != null) {
+                if (this.hand[i] == cardToRemove){
+                    this.hand[i] = null;
+                    break;
+                }
+            }
+        }
     }
 }
