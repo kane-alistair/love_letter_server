@@ -30,4 +30,7 @@ public class Player {
     }
 
 
+    public void discard(int index) {
+        this.hand[index] = null;
+    }
 }

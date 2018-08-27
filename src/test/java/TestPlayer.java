@@ -40,4 +40,23 @@ public class TestPlayer {
         expected[1] = 1;
         assertArrayEquals(expected, player1.getHand());
     }
+
+    @Test
+    public void shouldNotBeAbleToAddThreeCardsToHand() {
+        player1.addCard(1);
+        player1.addCard(1);
+        player1.addCard(5);
+        Integer[] expected = new Integer[2];
+        expected[0] = 1;
+        expected[1] = 1;
+        assertArrayEquals(expected, player1.getHand());
+    }
+
+    @Test
+    public void shouldBeAbleToDiscard() {
+        player1.addCard(1);
+        player1.discard(0);
+        Integer[] expected = new Integer[2];
+        assertArrayEquals(expected, player1.getHand());
+    }
 }
