@@ -59,4 +59,9 @@ public class TestPlayer {
         Integer[] expected = new Integer[2];
         assertArrayEquals(expected, player1.getHand());
     }
+
+    @Test
+    public void shouldStartWithAnDiscardPile() {
+        assertEquals(0, player1.getDiscardPileLength());
+    }
 }

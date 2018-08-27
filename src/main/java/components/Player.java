@@ -1,12 +1,16 @@
 package components;
 
+import java.util.ArrayList;
+
 public class Player {
     private String name;
     private Integer hand[];
+    private ArrayList<Integer> discardPile;
 
     public Player(String name) {
         this.name = name;
         this.hand = new Integer[2];
+        this.discardPile = new ArrayList<>();
     }
 
     public int getHandCount() {
@@ -29,8 +33,11 @@ public class Player {
         }
     }
 
-
     public void discard(int index) {
         this.hand[index] = null;
+    }
+
+    public int getDiscardPileLength(){
+        return this.discardPile.size();
     }
 }
