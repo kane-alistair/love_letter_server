@@ -64,4 +64,10 @@ public class TestPlayer {
     public void shouldStartWithAnDiscardPile() {
         assertEquals(0, player1.getDiscardPileLength());
     }
+
+    @Test
+    public void shouldBeAbleToAddToDiscardPile() {
+        player1.addToDiscardPile(1);
+        assertEquals(1, player1.getDiscardPileLength());
+    }
 }
