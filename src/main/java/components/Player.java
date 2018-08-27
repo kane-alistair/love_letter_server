@@ -1,6 +1,4 @@
-package Player;
-
-import java.lang.reflect.Array;
+package components;
 
 public class Player {
     private String name;
@@ -14,4 +12,18 @@ public class Player {
     public int getHandCount() {
         return this.hand.length;
     }
+
+    public Integer[] getHand() {
+        return this.hand.clone();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void addCard(int cardValue){
+        this.hand[0] = cardValue;
+    }
+
+
 }
