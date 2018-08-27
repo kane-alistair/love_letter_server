@@ -33,24 +33,25 @@ public class Player {
         }
     }
 
-    public void discard(int index) {
-        addToDiscardPile(index);
-        this.hand[index] = null;
+    public void discard(int card) {
+        removeCardFromHand(card);
+        addCardToDiscardPile(card);
+    }
+
+    private void addCardToDiscardPile(int card){
+        this.discardPile.add(card);
     }
 
     public int getDiscardPileLength(){
         return this.discardPile.size();
     }
 
-    private void addToDiscardPile(int card) {
-        this.discardPile.add(card);
-    }
-
     public void playCard(int card) {
-        addToDiscardPile(card);
+        removeCardFromHand(card);
+        addCardToDiscardPile(card);
     }
 
-    public void removeCard(int cardToRemove) {
+    public void removeCardFromHand(int cardToRemove) {
         for (int i = 0; i < this.hand.length; i++){
             if (this.hand[i] != null) {
                 if (this.hand[i] == cardToRemove){
