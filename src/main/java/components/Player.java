@@ -47,7 +47,7 @@ public class Player {
 
     public void knockOut(){
         this.knockedOut = true;
-        discard(this.hand[0]);
+        discard(this.getHeldCard());
     }
 
     public boolean isKnockedOut() {
@@ -88,7 +88,7 @@ public class Player {
         if (isHolding(card)) {
             removeCardFromHand(card);
             addCardToDiscardPile(card);
-            PlayerAction.handleAction(this, card, selected, guess);
+            PlayerAction.handleAction(card, this, selected, guess);
         }
     }
 

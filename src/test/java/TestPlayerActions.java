@@ -13,9 +13,9 @@ public class TestPlayerActions {
         player1 = new Player("Bob");
         player2 = new Player("Vicky");
     }
-//    guard
+
     @Test
-    public void shouldBeAbleToKnockOutPlayerWithGuardIfGuessIsCorrect() {
+    public void shouldBeAbleToKnockOutPlayerIfGuessIsCorrectWhenGuard() {
         player1.addCard(1);
         player2.addCard(8);
         player1.playCard(1, player2, 8);
@@ -23,7 +23,7 @@ public class TestPlayerActions {
     }
 
     @Test
-    public void shouldNotBeKnockedOutIfGuessIsIncorrect() {
+    public void shouldNotBeKnockedOutIfGuessIsIncorrectWhenGuard() {
         player1.addCard(1);
         player2.addCard(8);
         player1.playCard(1, player2, 5);
@@ -36,5 +36,33 @@ public class TestPlayerActions {
         player2.addCard(5);
         player1.playCard(2, player2, 0);
         assertEquals(1, player1.getSeenPileLength());
+    }
+
+    @Test
+    public void shouldKnockOutPlayerWithLowerCardWhenBaron() {
+        player1.addCard(3);
+        player1.addCard(8);
+        player2.addCard(1);
+        player1.playCard(3, player2, 0);
+        assertEquals(true, player2.isKnockedOut());
+    }
+
+    @Test
+    public void shouldKnockOutActionTakerWithLowerCardWhenBaron() {
+        player1.addCard(3);
+        player1.addCard(1);
+        player2.addCard(8);
+        player1.playCard(3, player2, 0);
+        assertEquals(true, player1.isKnockedOut());
+    }
+
+    @Test
+    public void shouldHaveNoEffectIfDrawWhenBaron() {
+        player1.addCard(3);
+        player1.addCard(5);
+        player2.addCard(5);
+        player1.playCard(3, player2, 0);
+        assertEquals(false, player1.isKnockedOut());
+        assertEquals(false, player2.isKnockedOut());
     }
 }
