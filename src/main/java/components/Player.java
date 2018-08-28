@@ -9,6 +9,7 @@ public class Player {
     private ArrayList<Integer> discardPile;
     private boolean knockedOut;
     private HashMap<Player, Integer> seenCards;
+    private boolean protection;
 
     public Player(String name) {
         this.name = name;
@@ -16,6 +17,7 @@ public class Player {
         this.discardPile = new ArrayList<>();
         this.knockedOut = false;
         this.seenCards = new HashMap<>();
+        this.protection = false;
     }
 
     public int getHandCount() {
@@ -43,6 +45,10 @@ public class Player {
 
     public int getSeenPileLength(){
         return this.seenCards.size();
+    }
+
+    public boolean isProtected() {
+        return protection;
     }
 
     public void knockOut(){
@@ -101,5 +107,9 @@ public class Player {
                 }
             }
         }
+    }
+
+    public void protect() {
+        this.protection = true;
     }
 }

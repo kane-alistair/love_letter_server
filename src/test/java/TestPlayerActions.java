@@ -65,4 +65,17 @@ public class TestPlayerActions {
         assertEquals(false, player1.isKnockedOut());
         assertEquals(false, player2.isKnockedOut());
     }
+
+    @Test
+    public void shouldNotBeAffectedByAttackWhenProtectedByHandMaid() {
+        player1.addCard(4);
+        player1.addCard(3);
+        player2.addCard(1);
+
+        player1.playCard(4, player1, 0);
+        player2.playCard(1, player1, 3);
+        assertEquals(false, player1.isKnockedOut());
+    }
+
+    
 }
