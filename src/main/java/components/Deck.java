@@ -42,4 +42,8 @@ public class Deck {
     public boolean isBurner() {
         return (burner != 0);
     }
+
+    public void dealCard(Player player) {
+        player.addCard(this.cards.remove(0));
+    }
 }

@@ -60,6 +60,10 @@ public class Player {
         return knockedOut;
     }
 
+    public boolean isHoldingCard(){
+        return (this.hand[0] != null) || (this.hand[1] != null);
+    }
+
     public boolean isHolding(int card) {
         for (Integer holeCard : this.hand){
             if (holeCard != null){
