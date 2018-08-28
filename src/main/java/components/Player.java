@@ -98,6 +98,11 @@ public class Player {
         }
     }
 
+    public void discardAndDraw(int newCard){
+        discard(this.getHeldCard());
+        this.hand[0] = newCard;
+    }
+
     private void removeCardFromHand(int cardToRemove) {
         for (int i = 0; i < this.hand.length; i++){
             if (this.hand[i] != null) {

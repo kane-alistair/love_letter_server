@@ -98,15 +98,15 @@ public class TestPlayer {
 
     @Test
     public void shouldAddCardToDiscardPileWhenPlayingCard() {
-        player1.addCard(5);
-        player1.playCard(5, player1, 0);
+        player1.addCard(1);
+        player1.playCard(1, player1, 0);
         assertEquals(1, player1.getDiscardPileLength());
     }
 
     @Test
     public void shouldRemoveCardFromHandWhenPlayed() {
-        player1.addCard(5);
-        player1.playCard(5, player1, 0);
+        player1.addCard(1);
+        player1.playCard(1, player1, 0);
         Integer[] expected = new Integer[2];
         assertArrayEquals(expected, player1.getHand());
     }

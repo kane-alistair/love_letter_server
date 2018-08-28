@@ -31,6 +31,14 @@ public class TestPlayerActions {
     }
 
     @Test
+    public void shouldNotBeAbleToAffectSelfWhenGuard() {
+        player1.addCard(1);
+        player1.addCard(3);
+        player1.playCard(1, player1, 3);
+        assertEquals(false, player1.isKnockedOut());
+    }
+
+    @Test
     public void shouldAddToSeenPileWhenPriest() {
         player1.addCard(2);
         player2.addCard(5);
@@ -77,5 +85,11 @@ public class TestPlayerActions {
         assertEquals(false, player1.isKnockedOut());
     }
 
-    
+    @Test
+    public void shouldDiscardAndDrawWhenPrince() {
+        player1.addCard(5);
+        player2.addCard(3);
+        player1.playCard(5, player2, 0);
+        assertEquals(1, player2.getHeldCard());
+    }
 }
