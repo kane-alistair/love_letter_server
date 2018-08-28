@@ -61,4 +61,13 @@ public class Player {
             }
         }
     }
+
+    public int getFirstCard() {
+        return this.hand[0];
+    }
+
+
+    public int getSecondCard() {
+        return this.hand[1];
+    }
 }

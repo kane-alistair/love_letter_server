@@ -101,4 +101,17 @@ public class TestPlayer {
         Integer[] expected = new Integer[2];
         assertArrayEquals(expected, player1.getHand());
     }
+
+    @Test
+    public void shouldBeAbleToDisplayFirstCard() {
+        player1.addCard(5);
+        assertEquals(5, player1.getFirstCard());
+    }
+
+    @Test
+    public void shouldBeAbleToDisplaySecondCard() {
+        player1.addCard(5);
+        player1.addCard(7);
+        assertEquals(7, player1.getSecondCard());
+    }
 }
