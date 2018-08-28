@@ -46,4 +46,10 @@ public class Deck {
     public void dealCard(Player player) {
         player.addCard(this.cards.remove(0));
     }
+
+    public void dealRound(Player[] players) {
+        for (Player player : players){
+            dealCard(player);
+        }
+    }
 }
