@@ -20,18 +20,18 @@ public class PlayerAction {
 
     private static void guard(Player actionTaker, Player selected, int guess){
         if (actionTaker != selected){
-            if (!selected.isProtected()){
+            if (selected.isAttackable()){
                 if (selected.isHolding(guess)) selected.knockOut();
             }
         }
     }
 
     private static void priest(Player actionTaker, Player selected){
-        if (!selected.isProtected()) actionTaker.addSeenCard(selected);
+        if (!selected.isAttackable()) actionTaker.addSeenCard(selected);
     }
 
     private static void baron(Player actionTaker, Player selected) {
-        if (!selected.isProtected()) {
+        if (!selected.isAttackable()) {
             if (actionTaker.getHeldCard() > selected.getHeldCard()) {
                 selected.knockOut();
             } else if (selected.getHeldCard() > actionTaker.getHeldCard()) {
@@ -45,7 +45,7 @@ public class PlayerAction {
     }
 
     private static void prince(Player selected) {
-        if (!selected.isProtected()) selected.discardAndDraw(1);
+        if (!selected.isAttackable()) selected.discardAndDraw(1);
     }
 
     private static void king(Player actionTaker, Player selected) {

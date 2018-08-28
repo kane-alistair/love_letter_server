@@ -103,4 +103,11 @@ public class TestPlayerActions {
         assertEquals(3, player1.getHeldCard());
         assertEquals(7, player2.getHeldCard());
     }
+
+    @Test
+    public void shouldBeKnockedOutWhenDiscardPrincess() {
+        player1.addCard(8);
+        player1.discard(8);
+        assertEquals(true, player1.isKnockedOut());
+    }
 }
