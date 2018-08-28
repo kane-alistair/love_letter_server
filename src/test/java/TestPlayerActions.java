@@ -75,7 +75,7 @@ public class TestPlayerActions {
     }
 
     @Test
-    public void shouldNotBeAffectedByAttackWhenProtectedByHandMaid() {
+    public void shouldNotBeAffectedByAttackWhenHandMaid() {
         player1.addCard(4);
         player1.addCard(3);
         player2.addCard(1);
@@ -91,5 +91,16 @@ public class TestPlayerActions {
         player2.addCard(3);
         player1.playCard(5, player2, 0);
         assertEquals(1, player2.getHeldCard());
+    }
+
+    @Test
+    public void shouldSwapHandsWhenKing() {
+        player1.addCard(6);
+        player1.addCard(7);
+        player2.addCard(3);
+
+        player1.playCard(6, player2, 0);
+        assertEquals(3, player1.getHeldCard());
+        assertEquals(7, player2.getHeldCard());
     }
 }

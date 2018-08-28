@@ -13,6 +13,8 @@ public class PlayerAction {
                     break;
             case 5: prince(selected);
                     break;
+            case 6: king(actionTaker, selected);
+                    break;
         }
     }
 
@@ -43,6 +45,14 @@ public class PlayerAction {
     }
 
     private static void prince(Player selected) {
-        selected.discardAndDraw(1);
+        if (!selected.isProtected()) selected.discardAndDraw(1);
+    }
+
+    private static void king(Player actionTaker, Player selected) {
+        int actionTakerCard = actionTaker.removeHeldCard();
+        int selectedCard = selected.removeHeldCard();
+
+        actionTaker.addCard(selectedCard);
+        selected.addCard(actionTakerCard);
     }
 }

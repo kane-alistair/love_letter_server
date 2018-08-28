@@ -77,6 +77,19 @@ public class Player {
         }
     }
 
+    public int removeHeldCard(){
+        if (this.hand[0] != null){
+            int heldCard = this.hand[0];
+            this.hand[0] = null;
+            return heldCard;
+        } else if (this.hand[1] != null){
+            int heldCard = this.hand[1];
+            this.hand[1] = null;
+            return heldCard;
+        }
+        return 0;
+    }
+
     public void discard(int card) {
         removeCardFromHand(card);
         addCardToDiscardPile(card);
