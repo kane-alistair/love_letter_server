@@ -6,11 +6,13 @@ public class Player {
     private String name;
     private Integer hand[];
     private ArrayList<Integer> discardPile;
+    private boolean knockedOut;
 
     public Player(String name) {
         this.name = name;
         this.hand = new Integer[2];
         this.discardPile = new ArrayList<>();
+        this.knockedOut = false;
     }
 
     public int getHandCount() {
@@ -35,6 +37,15 @@ public class Player {
 
     public int getDiscardPileLength(){
         return this.discardPile.size();
+    }
+
+    public void knockOut(){
+        this.knockedOut = true;
+        discard(this.hand[0]);
+    }
+
+    public boolean isKnockedOut() {
+        return knockedOut;
     }
 
     public boolean isHolding(int card) {
@@ -63,10 +74,11 @@ public class Player {
         this.discardPile.add(card);
     }
 
-    public void playCard(int card) {
+    public void playCard(int card, Player selected, int guess) {
         if (isHolding(card)) {
             removeCardFromHand(card);
             addCardToDiscardPile(card);
+            PlayerAction.handleAction(card, selected, guess);
         }
     }
 
