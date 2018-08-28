@@ -49,8 +49,10 @@ public class Player {
 
 
     public void playCard(int card) {
-        removeCardFromHand(card);
-        addCardToDiscardPile(card);
+        if (isHolding(card)) {
+            removeCardFromHand(card);
+            addCardToDiscardPile(card);
+        }
     }
 
     public void removeCardFromHand(int cardToRemove) {
