@@ -46,6 +46,8 @@ public class Player {
         return this.discardPile.size();
     }
 
+
+
     public void playCard(int card) {
         removeCardFromHand(card);
         addCardToDiscardPile(card);
@@ -66,8 +68,16 @@ public class Player {
         return this.hand[0];
     }
 
-
     public int getSecondCard() {
         return this.hand[1];
+    }
+
+    public boolean isHolding(int card) {
+        for (Integer holeCard : this.hand){
+            if (holeCard != null){
+                if (holeCard == card) return true;
+            }
+        }
+        return false;
     }
 }

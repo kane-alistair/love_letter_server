@@ -81,14 +81,26 @@ public class TestPlayer {
     }
 
     @Test
-    public void shouldAddCardToDiscardPileWhenCardIsDiscarded() {
+    public void shouldAddCardToDiscardPileWhenDiscarding() {
         player1.addCard(5);
         player1.discard(0);
         assertEquals(1, player1.getDiscardPileLength());
     }
 
     @Test
-    public void shouldAddCardToDiscardPileWhenCardIsPlayed() {
+    public void shouldBeAbleToCheckHandForExistingCard() {
+        player1.addCard(5);
+        assertEquals(true, player1.isHolding(5));
+    }
+
+    @Test
+    public void shouldReturnFalseIfCardNotInHand() {
+        player1.addCard(3);
+        assertEquals(false, player1.isHolding(7));
+    }
+
+    @Test
+    public void shouldAddCardToDiscardPileWhenPlayingCard() {
         player1.addCard(5);
         player1.playCard(5);
         assertEquals(1, player1.getDiscardPileLength());
