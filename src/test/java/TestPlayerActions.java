@@ -30,9 +30,11 @@ public class TestPlayerActions {
         assertEquals(false, player2.isKnockedOut());
     }
 
-//    @Test
-//    public void shouldAddToSeenPileWhenPriestUsed() {
-//        player1.addCard(2);
-//        player1.playCard(2, player2, 0);
-//    }
+    @Test
+    public void shouldAddToSeenPileWhenPriest() {
+        player1.addCard(2);
+        player2.addCard(5);
+        player1.playCard(2, player2, 0);
+        assertEquals(1, player1.getSeenPileLength());
+    }
 }
