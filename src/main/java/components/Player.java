@@ -1,18 +1,21 @@
 package components;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Player {
     private String name;
     private Integer hand[];
     private ArrayList<Integer> discardPile;
     private boolean knockedOut;
+    private HashMap<Player, Integer> seenCards;
 
     public Player(String name) {
         this.name = name;
         this.hand = new Integer[2];
         this.discardPile = new ArrayList<>();
         this.knockedOut = false;
+        this.seenCards = new HashMap<>();
     }
 
     public int getHandCount() {
@@ -23,11 +26,10 @@ public class Player {
         return this.hand.clone();
     }
 
-    public int getFirstCard() {
-        return this.hand[0];
-    }
-
-    public int getSecondCard() {
+    public int getHeldCard(){
+        if (this.hand[0] != null){
+            return this.hand[0];
+        }
         return this.hand[1];
     }
 
@@ -37,6 +39,10 @@ public class Player {
 
     public int getDiscardPileLength(){
         return this.discardPile.size();
+    }
+
+    public int getSeenPileLength(){
+        return this.seenCards.size();
     }
 
     public void knockOut(){
@@ -74,11 +80,15 @@ public class Player {
         this.discardPile.add(card);
     }
 
+    public void addSeenCard(Player player){
+        this.seenCards.put(player, player.getHeldCard());
+    }
+
     public void playCard(int card, Player selected, int guess) {
         if (isHolding(card)) {
             removeCardFromHand(card);
             addCardToDiscardPile(card);
-            PlayerAction.handleAction(card, selected, guess);
+            PlayerAction.handleAction(this, card, selected, guess);
         }
     }
 

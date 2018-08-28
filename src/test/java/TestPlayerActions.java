@@ -21,4 +21,18 @@ public class TestPlayerActions {
         player1.playCard(1, player2, 8);
         assertEquals(true, player2.isKnockedOut());
     }
+
+    @Test
+    public void shouldNotBeKnockedOutIfGuessIsIncorrect() {
+        player1.addCard(1);
+        player2.addCard(8);
+        player1.playCard(1, player2, 5);
+        assertEquals(false, player2.isKnockedOut());
+    }
+
+//    @Test
+//    public void shouldAddToSeenPileWhenPriestUsed() {
+//        player1.addCard(2);
+//        player1.playCard(2, player2, 0);
+//    }
 }

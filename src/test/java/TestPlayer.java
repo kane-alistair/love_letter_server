@@ -9,8 +9,8 @@ public class TestPlayer {
     private Player player1;
 
     @Before
-    public void setUp(){
-       player1 = new Player("Bob");
+    public void setUp() {
+        player1 = new Player("Bob");
     }
 
     @Test
@@ -21,6 +21,11 @@ public class TestPlayer {
     @Test
     public void shouldStartWithHandArrayOfLengthTwo() {
         assertEquals(2, player1.getHandCount());
+    }
+
+    @Test
+    public void shouldStartWithAnEmptySeenCardsPile() {
+        assertEquals(0, player1.getSeenPileLength());
     }
 
     @Test
@@ -107,15 +112,15 @@ public class TestPlayer {
     }
 
     @Test
-    public void shouldBeAbleToDisplayFirstCard() {
+    public void shouldDiscardHandWhenKnockedOut() {
         player1.addCard(5);
-        assertEquals(5, player1.getFirstCard());
+        player1.knockOut();
+        assertEquals(1, player1.getDiscardPileLength());
     }
 
     @Test
-    public void shouldBeAbleToDisplaySecondCard() {
+    public void shouldBeAbleToDisplayHeldCard() {
         player1.addCard(5);
-        player1.addCard(7);
-        assertEquals(7, player1.getSecondCard());
+        assertEquals(5, player1.getHeldCard());
     }
 }
