@@ -96,6 +96,7 @@ public class Player {
     }
 
     private void addCardToDiscardPile(int card){
+        if (card == 8) this.knockedOut = true;
         this.discardPile.add(card);
     }
 

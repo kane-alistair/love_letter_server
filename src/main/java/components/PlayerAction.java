@@ -27,11 +27,11 @@ public class PlayerAction {
     }
 
     private static void priest(Player actionTaker, Player selected){
-        if (!selected.isAttackable()) actionTaker.addSeenCard(selected);
+        if (selected.isAttackable()) actionTaker.addSeenCard(selected);
     }
 
     private static void baron(Player actionTaker, Player selected) {
-        if (!selected.isAttackable()) {
+        if (selected.isAttackable()) {
             if (actionTaker.getHeldCard() > selected.getHeldCard()) {
                 selected.knockOut();
             } else if (selected.getHeldCard() > actionTaker.getHeldCard()) {
@@ -45,7 +45,7 @@ public class PlayerAction {
     }
 
     private static void prince(Player selected) {
-        if (!selected.isAttackable()) selected.discardAndDraw(1);
+        if (selected.isAttackable()) selected.discardAndDraw(1);
     }
 
     private static void king(Player actionTaker, Player selected) {
