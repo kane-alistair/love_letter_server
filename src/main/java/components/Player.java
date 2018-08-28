@@ -21,8 +21,29 @@ public class Player {
         return this.hand.clone();
     }
 
+    public int getFirstCard() {
+        return this.hand[0];
+    }
+
+    public int getSecondCard() {
+        return this.hand[1];
+    }
+
     public String getName() {
         return name;
+    }
+
+    public int getDiscardPileLength(){
+        return this.discardPile.size();
+    }
+
+    public boolean isHolding(int card) {
+        for (Integer holeCard : this.hand){
+            if (holeCard != null){
+                if (holeCard == card) return true;
+            }
+        }
+        return false;
     }
 
     public void addCard(int cardValue){
@@ -42,12 +63,6 @@ public class Player {
         this.discardPile.add(card);
     }
 
-    public int getDiscardPileLength(){
-        return this.discardPile.size();
-    }
-
-
-
     public void playCard(int card) {
         if (isHolding(card)) {
             removeCardFromHand(card);
@@ -55,7 +70,7 @@ public class Player {
         }
     }
 
-    public void removeCardFromHand(int cardToRemove) {
+    private void removeCardFromHand(int cardToRemove) {
         for (int i = 0; i < this.hand.length; i++){
             if (this.hand[i] != null) {
                 if (this.hand[i] == cardToRemove){
@@ -64,22 +79,5 @@ public class Player {
                 }
             }
         }
-    }
-
-    public int getFirstCard() {
-        return this.hand[0];
-    }
-
-    public int getSecondCard() {
-        return this.hand[1];
-    }
-
-    public boolean isHolding(int card) {
-        for (Integer holeCard : this.hand){
-            if (holeCard != null){
-                if (holeCard == card) return true;
-            }
-        }
-        return false;
     }
 }
