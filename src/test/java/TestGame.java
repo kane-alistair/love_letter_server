@@ -3,6 +3,9 @@ import components.Player;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 
 import static org.junit.Assert.assertEquals;
@@ -12,6 +15,7 @@ public class TestGame {
     private Player player1;
     private Player player2;
     private Player player3;
+    private Player[] players;
     private Deck deck1;
 
     @Before
@@ -19,7 +23,7 @@ public class TestGame {
         player1 = new Player("Bob");
         player2 = new Player("Vic");
         player3 = new Player("Joe");
-        Player[] players = new Player[3];
+        players = new Player[3];
         players[0] = player1;
         players[1] = player2;
         players[2] = player3;
@@ -56,9 +60,17 @@ public class TestGame {
         assertEquals(expected, game1.getWins());
     }
 
-    //    @Test
-//    public void shouldKeepTrackOfMostWinningPlayer() {
-//        game1.roundWinner(player1);
-//        assertEquals(player1, game1.currentWinner());
-//    }
+    @Test
+    public void shouldKeepTrackOfCurrentWinningPlayer() {
+        game1.roundWinner(player1);
+        assertEquals(player1, game1.currentWinner().get(0));
+    }
+
+    @Test
+    public void shouldKeepTrackOfMultipleCurrentWinningPlayers() {
+        game1.roundWinner(player1);
+        game1.roundWinner(player2);
+        game1.roundWinner(player3);
+        assertEquals(3, game1.currentWinner().size());
+    }
 }

@@ -1,7 +1,10 @@
 import components.Deck;
 import components.Player;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class Game {
     private Deck deck;
@@ -44,8 +47,21 @@ public class Game {
             }
         }
     }
-//
-//    public Player currentWinner() {
-//        for ()
-//    }
+
+    public ArrayList<Player> currentWinner() {
+        ArrayList<Player> winners = new ArrayList<>();
+        int mostWins = 0;
+
+        for (Map.Entry<Player, Integer> entry : this.wins.entrySet()){
+            if (entry.getValue() > mostWins){
+                mostWins = entry.getValue();
+                winners.clear();
+                winners.add(entry.getKey());
+            } else if (entry.getValue() == mostWins){
+                winners.add(entry.getKey());
+            }
+        }
+
+        return winners;
+    }
 }
