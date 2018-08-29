@@ -1,4 +1,6 @@
-package components;
+package player;
+
+import player.Player;
 
 public class PlayerAction {
     public static void handleAction(int card, Player actionTaker, Player selected, int guess){

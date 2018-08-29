@@ -1,8 +1,7 @@
-package controllers;
+package player;
 
-import components.Deck;
-import components.Game;
-import components.Player;
+import game.Deck;
+import game.Game;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,4 +29,6 @@ public class PlayerController {
         game.removePlayer(id);
         return allPlayers();
     }
+
+
 }

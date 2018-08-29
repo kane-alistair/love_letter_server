@@ -1,4 +1,4 @@
-import components.Player;
+import player.Player;
 import org.junit.Before;
 import org.junit.Test;
 

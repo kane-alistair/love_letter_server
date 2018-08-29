@@ -1,4 +1,6 @@
-package components;
+package game;
+
+import player.Player;
 
 import java.util.ArrayList;
 import java.util.HashMap;

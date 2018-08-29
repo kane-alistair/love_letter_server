@@ -1,5 +1,5 @@
-import components.Deck;
-import components.Player;
+import game.Deck;
+import player.Player;
 import org.junit.Before;
 import org.junit.Test;
 
