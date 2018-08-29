@@ -6,13 +6,21 @@ import java.util.Map;
 
 public class Game {
     private Deck deck;
-    private Player[] players;
+    private ArrayList<Player> players;
     private HashMap<Player, Integer> wins;
 
-    public Game(Deck deck, Player[] players){
+    public Game(Deck deck){
         this.deck = deck;
-        this.players = players;
+        this.players = new ArrayList<>();
         this.wins = new HashMap<>();
+    }
+
+    public ArrayList<Player> getPlayers() {
+        return players;
+    }
+
+    public void addPlayer(String name){
+        this.players.add(new Player(name));
     }
 
     public void prepNewRound(){
@@ -26,9 +34,7 @@ public class Game {
         }
     }
 
-    public int getNumberOfPlayers() {
-        return this.players.length;
-    }
+    public int getNumberOfPlayers() { return this.players.size(); }
 
     public Deck getDeck() {
         return deck;
@@ -81,17 +87,17 @@ public class Game {
     }
 
     private ArrayList<Player> findRoundWinner() {
-        int winningHand = this.players[0].heldCard();
+        int winningHand = this.players.get(0).heldCard();
         ArrayList<Player> winners = new ArrayList<>();
-        winners.add(this.players[0]);
+        winners.add(this.players.get(0));
 
-        for (int i = 1; i < this.players.length; i++){
-            if (this.players[i].heldCard() > winningHand){
+        for (int i = 1; i < this.players.size(); i++){
+            if (this.players.get(i).heldCard() > winningHand){
                 winners.clear();
-                winners.add(this.players[i]);
-                winningHand = this.players[i].heldCard();
-            } else if(this.players[i].heldCard() == winningHand){
-                winners.add(this.players[i]);
+                winners.add(this.players.get(i));
+                winningHand = this.players.get(i).heldCard();
+            } else if(this.players.get(i).heldCard() == winningHand){
+                winners.add(this.players.get(i));
             }
         }
 
@@ -127,5 +133,15 @@ public class Game {
             total += value;
         }
         return total;
+    }
+
+    public void removePlayer(String name) {
+        Player playerToDelete = new Player("Temp");
+
+        for (Player player : this.players){
+            if (player.getName().equals(name)) playerToDelete = player;
+        }
+
+        this.players.remove(playerToDelete);
     }
 }

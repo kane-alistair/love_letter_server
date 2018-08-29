@@ -28,7 +28,7 @@ public class TestGame {
 
         deck1 = new Deck();
         deck1.prepStdDeck();
-        game1 = new Game(deck1, players);
+        game1 = new Game(deck1);
     }
 
     @Test
