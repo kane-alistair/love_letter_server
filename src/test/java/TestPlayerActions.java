@@ -43,7 +43,7 @@ public class TestPlayerActions {
         player1.addCard(2);
         player2.addCard(5);
         player1.playCard(2, player2, 0);
-        assertEquals(1, player1.getSeenPileLength());
+        assertEquals(1, player1.seenPileLength());
     }
 
     @Test
@@ -90,7 +90,7 @@ public class TestPlayerActions {
         player1.addCard(5);
         player2.addCard(3);
         player1.playCard(5, player2, 0);
-        assertEquals(1, player2.getHeldCard());
+        assertEquals(1, player2.heldCard());
     }
 
     @Test
@@ -100,8 +100,8 @@ public class TestPlayerActions {
         player2.addCard(3);
 
         player1.playCard(6, player2, 0);
-        assertEquals(3, player1.getHeldCard());
-        assertEquals(7, player2.getHeldCard());
+        assertEquals(3, player1.heldCard());
+        assertEquals(7, player2.heldCard());
     }
 
     @Test

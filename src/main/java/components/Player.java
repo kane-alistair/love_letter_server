@@ -20,44 +20,42 @@ public class Player {
         this.attackable = true;
     }
 
+    public String getName() {
+        return name;
+    }
+    public Integer[] getHand() { return hand; }
+    public ArrayList<Integer> getDiscardPile() {
+        return discardPile;
+    }
+    public boolean isKnockedOut() {
+        return knockedOut;
+    }
+    public HashMap<Player, Integer> getSeenCards() { return seenCards; }
+    public boolean isAttackable() {
+        return attackable;
+    }
     public int getHandCount() {
         return this.hand.length;
     }
 
-    public Integer[] getHand() {
-        return this.hand.clone();
-    }
-
-    public int getHeldCard(){
+    public int heldCard(){
         if (this.hand[0] != null){
             return this.hand[0];
         }
         return this.hand[1];
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public int getDiscardPileLength(){
+    public int discardPileLength(){
         return this.discardPile.size();
     }
 
-    public int getSeenPileLength(){
+    public int seenPileLength(){
         return this.seenCards.size();
-    }
-
-    public boolean isAttackable() {
-        return attackable;
     }
 
     public void knockOut(){
         this.knockedOut = true;
-        discard(this.getHeldCard());
-    }
-
-    public boolean isKnockedOut() {
-        return knockedOut;
+        discard(this.heldCard());
     }
 
     public boolean isHoldingCard(){
@@ -105,7 +103,7 @@ public class Player {
     }
 
     public void addSeenCard(Player player){
-        this.seenCards.put(player, player.getHeldCard());
+        this.seenCards.put(player, player.heldCard());
     }
 
     public void playCard(int card, Player selected, int guess) {
@@ -117,12 +115,8 @@ public class Player {
     }
 
     public void discardAndDraw(int newCard){
-        discard(this.getHeldCard());
+        discard(this.heldCard());
         this.hand[0] = newCard;
-    }
-
-    public ArrayList<Integer> getDiscardPile() {
-        return discardPile;
     }
 
     private void removeCardFromHand(int cardToRemove) {

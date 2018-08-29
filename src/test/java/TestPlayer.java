@@ -25,7 +25,7 @@ public class TestPlayer {
 
     @Test
     public void shouldStartWithAnEmptySeenCardsPile() {
-        assertEquals(0, player1.getSeenPileLength());
+        assertEquals(0, player1.seenPileLength());
     }
 
     @Test
@@ -61,7 +61,7 @@ public class TestPlayer {
     public void shouldAddToDiscardPileWhenDiscarding() {
         player1.addCard(1);
         player1.discard(1);
-        assertEquals(1, player1.getDiscardPileLength());
+        assertEquals(1, player1.discardPileLength());
     }
 
     @Test
@@ -74,14 +74,14 @@ public class TestPlayer {
 
     @Test
     public void shouldStartWithAnEmptyDiscardPile() {
-        assertEquals(0, player1.getDiscardPileLength());
+        assertEquals(0, player1.discardPileLength());
     }
 
     @Test
     public void shouldAddCardToDiscardPileWhenDiscarding() {
         player1.addCard(5);
         player1.discard(0);
-        assertEquals(1, player1.getDiscardPileLength());
+        assertEquals(1, player1.discardPileLength());
     }
 
     @Test
@@ -100,7 +100,7 @@ public class TestPlayer {
     public void shouldAddCardToDiscardPileWhenPlayingCard() {
         player1.addCard(1);
         player1.playCard(1, player1, 0);
-        assertEquals(1, player1.getDiscardPileLength());
+        assertEquals(1, player1.discardPileLength());
     }
 
     @Test
@@ -115,12 +115,12 @@ public class TestPlayer {
     public void shouldDiscardHandWhenKnockedOut() {
         player1.addCard(5);
         player1.knockOut();
-        assertEquals(1, player1.getDiscardPileLength());
+        assertEquals(1, player1.discardPileLength());
     }
 
     @Test
     public void shouldBeAbleToDisplayHeldCard() {
         player1.addCard(5);
-        assertEquals(5, player1.getHeldCard());
+        assertEquals(5, player1.heldCard());
     }
 }

@@ -81,16 +81,16 @@ public class Game {
     }
 
     private ArrayList<Player> findRoundWinner() {
-        int winningHand = this.players[0].getHeldCard();
+        int winningHand = this.players[0].heldCard();
         ArrayList<Player> winners = new ArrayList<>();
         winners.add(this.players[0]);
 
         for (int i = 1; i < this.players.length; i++){
-            if (this.players[i].getHeldCard() > winningHand){
+            if (this.players[i].heldCard() > winningHand){
                 winners.clear();
                 winners.add(this.players[i]);
-                winningHand = this.players[i].getHeldCard();
-            } else if(this.players[i].getHeldCard() == winningHand){
+                winningHand = this.players[i].heldCard();
+            } else if(this.players[i].heldCard() == winningHand){
                 winners.add(this.players[i]);
             }
         }

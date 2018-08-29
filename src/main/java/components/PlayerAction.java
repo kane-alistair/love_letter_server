@@ -32,9 +32,9 @@ public class PlayerAction {
 
     private static void baron(Player actionTaker, Player selected) {
         if (selected.isAttackable()) {
-            if (actionTaker.getHeldCard() > selected.getHeldCard()) {
+            if (actionTaker.heldCard() > selected.heldCard()) {
                 selected.knockOut();
-            } else if (selected.getHeldCard() > actionTaker.getHeldCard()) {
+            } else if (selected.heldCard() > actionTaker.heldCard()) {
                 actionTaker.knockOut();
             }
         }
