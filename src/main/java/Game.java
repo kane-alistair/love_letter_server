@@ -38,7 +38,7 @@ public class Game {
         return this.wins;
     }
 
-    public void roundWinner(Player player) {
+    public void incrementPlayerWins(Player player) {
         if (gameHasPlayer(player)) {
             if (this.wins.containsKey(player)) {
                 wins.put(player, this.wins.get(player) + 1);
@@ -63,5 +63,32 @@ public class Game {
         }
 
         return winners;
+    }
+
+    public void endRound() {
+        assignRoundWin();
+    }
+
+    private void assignRoundWin() {
+        incrementPlayerWins(findRoundWinner());
+    }
+
+    private Player findRoundWinner() {
+        int winningHand = 0;
+        ArrayList<Player> winners = new ArrayList<>();
+        winners.add(this.players[0]);
+
+        for (Player player : this.players){
+            if (player.getHeldCard() > winningHand){
+                winners.clear();
+                winners.add(player);
+                winningHand = player.getHeldCard();
+            }
+        }
+
+        return winners.get(0);
+//        if (winners.size() > 1){
+//            return (calculateDraw())
+//        }
     }
 }

@@ -45,7 +45,7 @@ public class TestGame {
 
     @Test
     public void shouldBeAbleToAssignARoundWin() {
-        game1.roundWinner(player1);
+        game1.incrementPlayerWins(player1);
         HashMap<Player, Integer> expected = new HashMap<>();
         expected.put(player1, 1);
         assertEquals(expected, game1.getWins());
@@ -53,8 +53,8 @@ public class TestGame {
 
     @Test
     public void shouldBeAbleToTallyMultipleRoundWins() {
-        game1.roundWinner(player1);
-        game1.roundWinner(player1);
+        game1.incrementPlayerWins(player1);
+        game1.incrementPlayerWins(player1);
         HashMap<Player, Integer> expected = new HashMap<>();
         expected.put(player1, 2);
         assertEquals(expected, game1.getWins());
@@ -62,15 +62,31 @@ public class TestGame {
 
     @Test
     public void shouldKeepTrackOfCurrentWinningPlayer() {
-        game1.roundWinner(player1);
+        game1.incrementPlayerWins(player1);
         assertEquals(player1, game1.currentWinner().get(0));
     }
 
     @Test
     public void shouldKeepTrackOfMultipleCurrentWinningPlayers() {
-        game1.roundWinner(player1);
-        game1.roundWinner(player2);
-        game1.roundWinner(player3);
+        game1.incrementPlayerWins(player1);
+        game1.incrementPlayerWins(player2);
+        game1.incrementPlayerWins(player3);
         assertEquals(3, game1.currentWinner().size());
     }
+
+    @Test
+    public void shouldBeAbleToFindWinnerAtEndOfRound() {
+        player1.addCard(3);
+        player2.addCard(5);
+        player3.addCard(8);
+        game1.endRound();
+        assertEquals(1, game1.currentWinner().size());
+        assertEquals(player3, game1.currentWinner().get(0));
+    }
+
+    @Test
+    public void shouldEndRoundWhenOutOfCards() { }
+
+    @Test
+    public void shouldClearPlayersHandsAtEndOfRound() { }
 }
