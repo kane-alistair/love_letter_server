@@ -2,8 +2,11 @@ package components;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Player {
+    private static AtomicInteger idGenerator = new AtomicInteger(0);
+    private int externalId;
     private String name;
     private Integer hand[];
     private ArrayList<Integer> discardPile;
@@ -12,6 +15,7 @@ public class Player {
     private boolean attackable;
 
     public Player(String name) {
+        this.externalId = idGenerator.incrementAndGet();
         this.name = name;
         this.hand = new Integer[2];
         this.discardPile = new ArrayList<>();
@@ -37,6 +41,7 @@ public class Player {
     public int getHandCount() {
         return this.hand.length;
     }
+    public int getExternalId() { return externalId; }
 
     public int heldCard(){
         if (this.hand[0] != null){

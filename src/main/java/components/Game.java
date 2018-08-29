@@ -40,26 +40,15 @@ public class Game {
         return deck;
     }
 
-    public boolean gameHasPlayer(Player player){
-        for (Player gamePlayer : this.players){
-            if (gamePlayer == player){
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public Object getWins() {
+    public HashMap<Player, Integer> getWins() {
         return this.wins;
     }
 
     public void incrementPlayerWins(Player player) {
-        if (gameHasPlayer(player)) {
-            if (this.wins.containsKey(player)) {
-                wins.put(player, this.wins.get(player) + 1);
-            } else {
-                wins.put(player, 1);
-            }
+        if (this.wins.containsKey(player)) {
+            wins.put(player, this.wins.get(player) + 1);
+        } else {
+            wins.put(player, 1);
         }
     }
 
@@ -135,13 +124,17 @@ public class Game {
         return total;
     }
 
-    public void removePlayer(String name) {
+    public void removePlayer(int id) {
         Player playerToDelete = new Player("Temp");
 
         for (Player player : this.players){
-            if (player.getName().equals(name)) playerToDelete = player;
+            if (player.getExternalId() == id) playerToDelete = player;
         }
 
         this.players.remove(playerToDelete);
+    }
+
+    public void dealCard(Player player) {
+        this.deck.dealCard(player);
     }
 }

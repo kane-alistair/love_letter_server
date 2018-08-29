@@ -26,8 +26,8 @@ public class PlayerController {
     }
 
     @RequestMapping(method=RequestMethod.DELETE, value="/players")
-    public ArrayList<Player> deletePlayer(@RequestParam(value="name", defaultValue = "default") String name){
-        game.removePlayer(name);
+    public ArrayList<Player> deletePlayer(@RequestParam(value="id", defaultValue = "default") int id){
+        game.removePlayer(id);
         return allPlayers();
     }
 }
