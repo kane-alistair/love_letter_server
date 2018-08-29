@@ -1,11 +1,9 @@
 import components.Deck;
+import components.Game;
 import components.Player;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 
 import static org.junit.Assert.assertEquals;
@@ -75,7 +73,7 @@ public class TestGame {
     }
 
     @Test
-    public void shouldBeAbleToFindWinnerAtEndOfRound() {
+    public void shouldBeAbleToAssignWinToWinnerAtEndOfRound() {
         player1.addCard(3);
         player2.addCard(5);
         player3.addCard(8);
@@ -85,8 +83,25 @@ public class TestGame {
     }
 
     @Test
-    public void shouldEndRoundWhenOutOfCards() { }
+    public void shouldTallyDiscardPileWhenDrawToFindWinner() {
+//        player1 discard pile is larger than others, so should be sole winner of round
+        player1.addCard(1);
+        player1.discard(1);
+        player1.addCard(5);
+        player2.addCard(5);
+        player3.addCard(5);
+        game1.endRound();
+        assertEquals(1, game1.currentWinner().size());
+        assertEquals(player1, game1.currentWinner().get(0));
+    }
 
     @Test
-    public void shouldClearPlayersHandsAtEndOfRound() { }
+    public void shouldAssignMultipleWinsToOverallDraw() {
+//          players discard pile totals are the same, so should all win round
+        player1.addCard(5);
+        player2.addCard(5);
+        player3.addCard(5);
+        game1.endRound();
+        assertEquals(3, game1.currentWinner().size());
+    }
 }

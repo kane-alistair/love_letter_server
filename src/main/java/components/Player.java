@@ -121,6 +121,10 @@ public class Player {
         this.hand[0] = newCard;
     }
 
+    public ArrayList<Integer> getDiscardPile() {
+        return discardPile;
+    }
+
     private void removeCardFromHand(int cardToRemove) {
         for (int i = 0; i < this.hand.length; i++){
             if (this.hand[i] != null) {
@@ -130,6 +134,14 @@ public class Player {
                 }
             }
         }
+    }
+
+    public void roundRestart(){
+        this.knockedOut = false;
+        removeHeldCard();
+        this.discardPile.clear();
+        this.seenCards.clear();
+        this.attackable = true;
     }
 
     public void protect() {
