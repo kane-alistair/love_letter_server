@@ -46,11 +46,15 @@ public class TestGame {
         expected.put(player1, 1);
         assertEquals(expected, game1.getWins());
     }
-//
-//    @Test
-//    public void shouldBeAbleToTallyMultipleRoundWins() {
-//        assertEquals();
-//    }
+
+    @Test
+    public void shouldBeAbleToTallyMultipleRoundWins() {
+        game1.roundWinner(player1);
+        game1.roundWinner(player1);
+        HashMap<Player, Integer> expected = new HashMap<>();
+        expected.put(player1, 2);
+        assertEquals(expected, game1.getWins());
+    }
 
     //    @Test
 //    public void shouldKeepTrackOfMostWinningPlayer() {
