@@ -1,11 +1,16 @@
-package game;
+package server.game;
 
-import player.Player;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.stereotype.Component;
+import server.player.Player;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+//@Component
+//@Scope(proxyMode= ScopedProxyMode.TARGET_CLASS, value="session")
 public class Game {
     private Deck deck;
     private ArrayList<Player> players;

@@ -1,6 +1,4 @@
-package player;
-
-import player.Player;
+package server.player;
 
 public class PlayerAction {
     public static void handleAction(int card, Player actionTaker, Player selected, int guess){

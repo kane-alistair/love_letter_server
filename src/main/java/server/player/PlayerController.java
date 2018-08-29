@@ -1,7 +1,7 @@
-package player;
+package server.player;
 
-import game.Deck;
-import game.Game;
+import server.game.Deck;
+import server.game.Game;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;

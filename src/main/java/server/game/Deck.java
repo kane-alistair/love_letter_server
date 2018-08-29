@@ -1,6 +1,6 @@
-package game;
+package server.game;
 
-import player.Player;
+import server.player.Player;
 
 import java.util.ArrayList;
 import java.util.Arrays;
