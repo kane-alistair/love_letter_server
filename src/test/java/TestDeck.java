@@ -17,7 +17,7 @@ public class TestDeck {
     @Test
     public void shouldStartWithSixteenCardsAndOneBurner() {
         assertEquals(15, deck.getNumberOfCards());
-        assertEquals(true, deck.isBurner());
+        assertEquals(true, deck.isCardBurned());
     }
 
     @Test

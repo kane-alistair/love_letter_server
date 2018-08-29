@@ -39,7 +39,7 @@ public class Deck {
         return burner;
     }
 
-    public boolean isBurner() {
+    public boolean isCardBurned() {
         return (burner != 0);
     }
 
