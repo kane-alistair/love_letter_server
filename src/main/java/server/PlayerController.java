@@ -10,7 +10,7 @@ import server.Player;
 import java.util.ArrayList;
 
 @RestController
-@RequestMapping("/players")
+@RequestMapping("/game/players")
 public class PlayerController {
     @Autowired
     private Game game;

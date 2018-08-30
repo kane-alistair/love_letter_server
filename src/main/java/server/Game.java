@@ -36,6 +36,11 @@ public class Game {
     public void prepNewRound(){
         this.deck.prepStdDeck();
         prepPlayers();
+        openDeal();
+    }
+
+    private void openDeal(){
+        this.deck.dealRound(this.players);
     }
 
     private void prepPlayers() {

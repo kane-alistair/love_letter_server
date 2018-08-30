@@ -3,6 +3,9 @@ import server.Player;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 import static org.junit.Assert.assertEquals;
 
 public class TestDeck {
@@ -34,10 +37,8 @@ public class TestDeck {
         Player player2 = new Player("Joe");
         Player player3 = new Player("Vic");
 
-        Player[] players = new Player[3];
-        players[0] = player1;
-        players[1] = player2;
-        players[2] = player3;
+        ArrayList<Player> players = new ArrayList<>();
+        Collections.addAll(players, player1, player2, player3);
 
         deck.dealRound(players);
         assertEquals(true, player1.isHoldingCard());

@@ -25,11 +25,6 @@ public class GameController {
         return game.cardsRemaining();
     }
 
-    @RequestMapping("/new-round")
-    public void prepRound(){
-        game.prepNewRound();
-    }
-
     @RequestMapping("/deck")
     public Deck showDeck(){
         return game.getDeck();
@@ -38,5 +33,10 @@ public class GameController {
     @RequestMapping("/scoreboard")
     public HashMap<Player, Integer> scoreBoard(){
         return game.getWins();
+    }
+
+    @RequestMapping(value = "/new-round", method = RequestMethod.POST)
+    public void prepRound(){
+        game.prepNewRound();
     }
 }
