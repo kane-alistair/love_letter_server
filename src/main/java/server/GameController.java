@@ -2,10 +2,12 @@ package server;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import server.Game;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 @RestController
 @RequestMapping("/game")
@@ -28,4 +30,13 @@ public class GameController {
         game.prepNewRound();
     }
 
+    @RequestMapping("/deck")
+    public Deck showDeck(){
+        return game.getDeck();
+    }
+
+    @RequestMapping("/scoreboard")
+    public HashMap<Player, Integer> scoreBoard(){
+        return game.getWins();
+    }
 }
