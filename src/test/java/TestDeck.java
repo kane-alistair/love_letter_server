@@ -1,5 +1,5 @@
-import server.game.Deck;
-import server.player.Player;
+import server.Deck;
+import server.Player;
 import org.junit.Before;
 import org.junit.Test;
 

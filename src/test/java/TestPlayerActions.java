@@ -1,4 +1,4 @@
-import server.player.Player;
+import server.Player;
 import org.junit.Before;
 import org.junit.Test;
 

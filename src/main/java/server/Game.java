@@ -1,21 +1,24 @@
-package server.game;
+package server;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
-import server.player.Player;
+import org.springframework.web.context.WebApplicationContext;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-//@Component
-//@Scope(proxyMode= ScopedProxyMode.TARGET_CLASS, value="session")
+@Component
 public class Game {
     private Deck deck;
     private ArrayList<Player> players;
     private HashMap<Player, Integer> wins;
 
+    @Autowired
     public Game(Deck deck){
         this.deck = deck;
         this.players = new ArrayList<>();

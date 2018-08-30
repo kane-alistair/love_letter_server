@@ -1,10 +1,11 @@
-package server.game;
+package server;
 
-import server.player.Player;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+
 
 public class Deck {
     private ArrayList<Integer> cards;

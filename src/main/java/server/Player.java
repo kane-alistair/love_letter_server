@@ -1,8 +1,14 @@
-package server.player;
+package server;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.*;
+import org.springframework.stereotype.Component;
+import org.springframework.web.context.WebApplicationContext;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicInteger;
+
 
 public class Player {
     private static AtomicInteger idGenerator = new AtomicInteger(0);
