@@ -6,12 +6,8 @@ import org.springframework.web.bind.annotation.RestController;
 import server.Game;
 
 @RestController
+@RequestMapping("/game")
 public class GameController {
     @Autowired
     private Game game;
-
-    @RequestMapping("/")
-    public int gameState(){
-        return game.getNumberOfPlayers();
-    }
 }

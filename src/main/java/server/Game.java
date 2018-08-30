@@ -147,4 +147,11 @@ public class Game {
     public void dealCard(Player player) {
         this.deck.dealCard(player);
     }
+
+    public Player getPlayer(int id) {
+        for (Player player : this.players){
+            if (player.getExternalId() == id) return player;
+        }
+        return null;
+    }
 }
