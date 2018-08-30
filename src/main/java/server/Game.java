@@ -163,4 +163,10 @@ public class Game {
         }
         return null;
     }
+
+    public void playerTakeTurn(int id, int card, int guess, int selected) {
+        Player turnTaker = getPlayer(id);
+        Player selectedPlayer = getPlayer(selected);
+        turnTaker.playCard(card, selectedPlayer, guess);
+    }
 }
