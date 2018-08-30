@@ -33,7 +33,7 @@ public class PlayerController {
     }
 
     @RequestMapping(method=RequestMethod.GET, value="/show")
-    public Player player(@RequestParam(value="id") int id){
+    public Player showPlayer(@RequestParam(value="id") int id){
         return game.getPlayer(id);
     }
 }

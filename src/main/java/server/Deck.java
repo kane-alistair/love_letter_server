@@ -17,6 +17,7 @@ public class Deck {
     }
 
     public void prepStdDeck() {
+        this.cards.clear();
         populateStdDeck();
         shuffle();
         burnCard();

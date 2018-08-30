@@ -44,6 +44,10 @@ public class Game {
         }
     }
 
+    public int cardsRemaining(){
+        return this.deck.getNumberOfCards();
+    }
+
     public int getNumberOfPlayers() { return this.players.size(); }
 
     public Deck getDeck() {
