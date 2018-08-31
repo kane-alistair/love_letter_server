@@ -1,36 +1,46 @@
 package server;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
-import org.springframework.stereotype.Component;
-import org.springframework.web.context.WebApplicationContext;
+import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-@Component
+@Service
 public class Game {
     private Deck deck;
-    private ArrayList<Player> players;
-    private HashMap<Player, Integer> wins;
+    private List<Player> players;
+    private Map<Player, Integer> wins;
 
-    @Autowired
-    public Game(Deck deck){
-        this.deck = deck;
+    public Game(){
+        this.deck = new Deck();
         this.players = new ArrayList<>();
         this.wins = new HashMap<>();
     }
 
-    public ArrayList<Player> getPlayers() {
+    @PostConstruct
+    public void setNewDeck(){
+        this.deck = new Deck();
+    }
+
+    @PostConstruct
+    public void setEmptyPlayerList(){
+        this.players = new ArrayList<>();
+    }
+
+    @PostConstruct
+    public void setEmptyWinsMap() {
+        this.wins = new HashMap<>();
+    }
+
+    public List<Player> getPlayers() {
         return players;
     }
 
-    public void addPlayer(String name){
-        this.players.add(new Player(name));
+    public void add(Player player){
+        this.players.add(player);
     }
 
     public void prepNewRound(){
@@ -59,7 +69,7 @@ public class Game {
         return deck;
     }
 
-    public HashMap<Player, Integer> getWins() {
+    public Map<Player, Integer> getWins() {
         return this.wins;
     }
 
@@ -71,8 +81,8 @@ public class Game {
         }
     }
 
-    public ArrayList<Player> currentWinner() {
-        ArrayList<Player> winners = new ArrayList<>();
+    public List<Player> currentWinner() {
+        List<Player> winners = new ArrayList<>();
         int mostWins = 0;
 
         for (Map.Entry<Player, Integer> entry : this.wins.entrySet()){
@@ -94,9 +104,9 @@ public class Game {
         }
     }
 
-    private ArrayList<Player> findRoundWinner() {
+    private List<Player> findRoundWinner() {
         int winningHand = this.players.get(0).heldCard();
-        ArrayList<Player> winners = new ArrayList<>();
+        List<Player> winners = new ArrayList<>();
         winners.add(this.players.get(0));
 
         for (int i = 1; i < this.players.size(); i++){
@@ -116,8 +126,8 @@ public class Game {
         return winners;
     }
 
-    private ArrayList<Player> findRoundWinnerWhenDraw(ArrayList<Player> drawingWinners) {
-        ArrayList<Player> afterDiscardPileComparison = new ArrayList<>();
+    private List<Player> findRoundWinnerWhenDraw(List<Player> drawingWinners) {
+        List<Player> afterDiscardPileComparison = new ArrayList<>();
         afterDiscardPileComparison.add(drawingWinners.get(0));
         int highestDiscardPile = tallyDiscardPile(drawingWinners.get(0));
 

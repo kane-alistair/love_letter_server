@@ -19,13 +19,13 @@ public class TestGame {
     public void setUp() {
         deck1 = new Deck();
         deck1.prepStdDeck();
-        game1 = new Game(deck1);
-        game1.addPlayer("Bob");
-        game1.addPlayer("Jan");
-        game1.addPlayer("Mop");
-        player1 = game1.getPlayers().get(0);
-        player2 = game1.getPlayers().get(1);
-        player3 = game1.getPlayers().get(2);
+        game1 = new Game();
+        player1 = new Player("Bob");
+        player2 = new Player("Jan");
+        player3 = new Player("Mop");
+        game1.add(player1);
+        game1.add(player2);
+        game1.add(player3);
     }
 
     @Test
@@ -35,7 +35,7 @@ public class TestGame {
 
     @Test
     public void shouldBeAbleToAddPlayers() {
-        game1.addPlayer("Hat");
+        game1.add(new Player("Temp"));
         assertEquals(4, game1.getNumberOfPlayers());
     }
 

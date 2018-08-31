@@ -20,6 +20,15 @@ public class Player {
     private HashMap<Player, Integer> seenCards;
     private boolean attackable;
 
+    public Player() {
+        this.externalId = idGenerator.incrementAndGet();
+        this.hand = new Integer[2];
+        this.discardPile = new ArrayList<>();
+        this.knockedOut = false;
+        this.seenCards = new HashMap<>();
+        this.attackable = true;
+    }
+
     public Player(String name) {
         this.externalId = idGenerator.incrementAndGet();
         this.name = name;

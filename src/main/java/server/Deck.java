@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 
 public class Deck {
@@ -51,7 +52,7 @@ public class Deck {
         player.addCard(this.cards.remove(0));
     }
 
-    public void dealRound(ArrayList<Player> players) {
+    public void dealRound(List<Player> players) {
         for (Player player : players){
             dealCard(player);
         }
