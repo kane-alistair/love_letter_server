@@ -10,6 +10,7 @@ import java.util.Map;
 
 @Service
 public class Game {
+    private boolean roundOver;
     private Deck deck;
     private List<Player> players;
     private Map<Player, Integer> wins;
@@ -18,6 +19,11 @@ public class Game {
         this.deck = new Deck();
         this.players = new ArrayList<>();
         this.wins = new HashMap<>();
+        this.roundOver = true;
+    }
+
+    public boolean isRoundOver() {
+        return roundOver;
     }
 
     @PostConstruct
@@ -35,6 +41,10 @@ public class Game {
         this.wins = new HashMap<>();
     }
 
+    public void setRoundOver(boolean state){
+        this.roundOver = state;
+    }
+
     public List<Player> getPlayers() {
         return players;
     }
@@ -47,6 +57,7 @@ public class Game {
         this.deck.prepStdDeck();
         prepPlayers();
         openDeal();
+        setRoundOver(false);
     }
 
     private void openDeal(){

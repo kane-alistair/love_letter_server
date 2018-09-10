@@ -20,15 +20,15 @@ public class PlayerController {
     }
 
     @RequestMapping(method= RequestMethod.POST, value="/")
-    public List<Player> addPlayer(@RequestBody Player newPlayer){
+    public int addPlayer(@RequestBody Player newPlayer){
         game.add(newPlayer);
-        return game.getPlayers();
+        return newPlayer.getExternalId();
     }
 
     @RequestMapping(method=RequestMethod.DELETE, value="/")
-    public List<Player> deletePlayer(@RequestParam(value="id") int id){
+    public Game deletePlayer(@RequestParam(value="id") int id){
         game.removePlayer(id);
-        return allPlayers();
+        return game;
     }
 
     @RequestMapping(method=RequestMethod.GET, value="/show")

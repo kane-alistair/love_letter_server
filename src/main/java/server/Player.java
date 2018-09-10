@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
-
 public class Player {
     private static AtomicInteger idGenerator = new AtomicInteger(0);
     private int externalId;
@@ -19,6 +18,7 @@ public class Player {
     private boolean knockedOut;
     private HashMap<Player, Integer> seenCards;
     private boolean attackable;
+    private boolean activeTurn;
 
     public Player() {
         this.externalId = idGenerator.incrementAndGet();
@@ -57,6 +57,7 @@ public class Player {
         return this.hand.length;
     }
     public int getExternalId() { return externalId; }
+    public boolean isActiveTurn() { return activeTurn; }
 
     public int heldCard(){
         if (this.hand[0] != null){
@@ -64,6 +65,8 @@ public class Player {
         }
         return this.hand[1];
     }
+
+    public void setActiveTurn(boolean activeTurn) { this.activeTurn = activeTurn; }
 
     public int discardPileLength(){
         return this.discardPile.size();
