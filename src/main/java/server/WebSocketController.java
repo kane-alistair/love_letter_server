@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.HtmlUtils;
 
 @Controller
@@ -26,6 +27,13 @@ public class WebSocketController {
     @MessageMapping(value = "/new-round")
     public Game prepRound(){
         game.prepNewRound();
+        return game;
+    }
+
+    @SendTo("/topic/game")
+    @MessageMapping(value = "/take-turn")
+    public Game takeTurn(Turn turn) {
+        game.playerTakeTurn(turn.getId(), turn.getCard(), turn.getGuess(), turn.getSelected());
         return game;
     }
 }

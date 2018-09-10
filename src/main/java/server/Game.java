@@ -3,10 +3,7 @@ package server;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class Game {
@@ -14,12 +11,14 @@ public class Game {
     private Deck deck;
     private List<Player> players;
     private Map<Player, Integer> wins;
+    private Player prevRoundWinner;
 
     public Game(){
         this.deck = new Deck();
         this.players = new ArrayList<>();
         this.wins = new HashMap<>();
         this.roundOver = true;
+        this.prevRoundWinner = null;
     }
 
     public boolean isRoundOver() {
@@ -57,7 +56,21 @@ public class Game {
         this.deck.prepStdDeck();
         prepPlayers();
         openDeal();
+        assignFirstActor();
         setRoundOver(false);
+    }
+
+    private void assignFirstActor() {
+//        random first actor or winner of previous round
+        if (prevRoundWinner == null){
+            Random rand = new Random();
+            int value = rand.nextInt(this.players.size());
+            this.players.get(value).setActiveTurn(true);
+            dealCard(this.players.get(value));
+        } else {
+            prevRoundWinner.setActiveTurn(true);
+            dealCard(prevRoundWinner);
+        }
     }
 
     private void openDeal(){
@@ -189,5 +202,18 @@ public class Game {
         Player turnTaker = getPlayer(id);
         Player selectedPlayer = getPlayer(selected);
         turnTaker.playCard(card, selectedPlayer, guess);
+        turnTaker.setActiveTurn(false);
+        int nextPlayerId = this.players.indexOf(turnTaker) + 1;
+        assignNextTurn(nextPlayerId);
+    }
+
+    private void assignNextTurn(int id) {
+        if (id == players.size()){
+            players.get(0).setActiveTurn(true);
+            dealCard(players.get(0));
+        } else {
+            players.get(id).setActiveTurn(true);
+            dealCard(players.get(id));
+        }
     }
 }
