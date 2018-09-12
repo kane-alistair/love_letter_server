@@ -33,7 +33,12 @@ public class WebSocketController {
     @SendTo("/topic/game")
     @MessageMapping(value = "/take-turn")
     public Game takeTurn(Turn turn) {
-        game.playerTakeTurn(turn.getId(), turn.getCard(), turn.getGuess(), turn.getSelected());
+        int id = turn.getId();
+        int card = turn.getCard();
+        int guess = turn.getGuess();
+        int selected = turn.getSelected();
+
+        game.playerTakeTurn(id, card, guess, selected);
         return game;
     }
 }

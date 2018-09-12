@@ -59,6 +59,11 @@ public class Player {
     public int getExternalId() { return externalId; }
     public boolean isActiveTurn() { return activeTurn; }
 
+
+    public void setAttackable(boolean attackable) {
+        this.attackable = attackable;
+    }
+
     public int heldCard(){
         if (this.hand[0] != null){
             return this.hand[0];
@@ -156,6 +161,7 @@ public class Player {
     public void roundRestart(){
         this.knockedOut = false;
         removeHeldCard();
+        this.activeTurn = false;
         this.discardPile.clear();
         this.seenCards.clear();
         this.attackable = true;
@@ -163,5 +169,9 @@ public class Player {
 
     public void protect() {
         this.attackable = false;
+    }
+
+    public void removeProtection() {
+        this.attackable = true;
     }
 }

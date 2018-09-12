@@ -12,6 +12,9 @@ public class Game {
     private List<Player> players;
     private Map<Player, Integer> wins;
     private Player prevRoundWinner;
+    private HashMap<Integer, Integer> prevMovePlayerIdCard;
+    private HashMap<Integer, Integer> prevMoveVictimIdGuess;
+    private int numberOfRounds;
 
     public Game(){
         this.deck = new Deck();
@@ -19,6 +22,73 @@ public class Game {
         this.wins = new HashMap<>();
         this.roundOver = true;
         this.prevRoundWinner = null;
+        this.prevMovePlayerIdCard = new HashMap<>();
+        this.prevMoveVictimIdGuess = new HashMap<>();
+        this.numberOfRounds = 0;
+    }
+
+    public int getNumberOfRounds() {
+        return numberOfRounds;
+    }
+
+    public void setNumberOfRounds(int numberOfRounds) {
+        this.numberOfRounds = numberOfRounds;
+    }
+
+    public void setDeck(Deck deck) {
+        this.deck = deck;
+    }
+
+    public void setPlayers(List<Player> players) {
+        this.players = players;
+    }
+
+    public void setPrevMovePlayerIdCard(HashMap<Integer, Integer> prevMovePlayerIdCard) {
+        this.prevMovePlayerIdCard = prevMovePlayerIdCard;
+    }
+
+    public HashMap<Integer, Integer> getPrevMoveVictimIdGuess() {
+        return prevMoveVictimIdGuess;
+    }
+
+    public void setPrevMoveVictimIdGuess(HashMap<Integer, Integer> prevMoveVictimIdGuess) {
+        this.prevMoveVictimIdGuess = prevMoveVictimIdGuess;
+    }
+
+    public void setWins(Map<Player, Integer> wins) {
+        this.wins = wins;
+    }
+
+    public HashMap<Integer, Integer> getPrevMovePlayerIdCard() {
+        return prevMovePlayerIdCard;
+    }
+
+    public void setPrevMovePlayer(HashMap<Integer, Integer> prevMovePlayerIdCard) {
+        this.prevMovePlayerIdCard = prevMovePlayerIdCard;
+    }
+
+    public HashMap<Integer, Integer> getPrevMoveVictim() {
+        return prevMoveVictimIdGuess;
+    }
+
+    public void setPrevMoveVictim(HashMap<Integer, Integer> prevMoveVictim) {
+        this.prevMoveVictimIdGuess = prevMoveVictim;
+    }
+
+    public Player getPrevRoundWinner() {
+        return prevRoundWinner;
+    }
+
+    public void setPrevRoundWinner(Player prevRoundWinner) {
+        this.prevRoundWinner = prevRoundWinner;
+    }
+
+    public HashMap<Integer, Integer> getPrevMove() {
+        return prevMovePlayerIdCard;
+    }
+
+    public void setPrevMove(HashMap<Integer, Integer> prevMovePlayer) {
+        this.prevMovePlayerIdCard = prevMovePlayer;
     }
 
     public boolean isRoundOver() {
@@ -122,12 +192,6 @@ public class Game {
         return winners;
     }
 
-    public void endRound() {
-        for (Player player : findRoundWinner()){
-            incrementPlayerWins(player);
-        }
-    }
-
     private List<Player> findRoundWinner() {
         int winningHand = this.players.get(0).heldCard();
         List<Player> winners = new ArrayList<>();
@@ -198,22 +262,68 @@ public class Game {
         return null;
     }
 
-    public void playerTakeTurn(int id, int card, int guess, int selected) {
+    public void playerTakeTurn(int id, int card, int guess, int selectedId) {
         Player turnTaker = getPlayer(id);
-        Player selectedPlayer = getPlayer(selected);
+        Player selectedPlayer = getPlayer(selectedId);
         turnTaker.playCard(card, selectedPlayer, guess);
         turnTaker.setActiveTurn(false);
-        int nextPlayerId = this.players.indexOf(turnTaker) + 1;
-        assignNextTurn(nextPlayerId);
+        this.prevMovePlayerIdCard.clear();
+        this.prevMoveVictimIdGuess.clear();
+        this.prevMovePlayerIdCard.put(id, card);
+        this.prevMoveVictimIdGuess.put(selectedId, guess);
+        boolean isRoundOver = checkRoundOver();
+
+        if (isRoundOver){
+            endRound();
+        } else {
+            int nextPlayerId = this.players.indexOf(turnTaker) + 1;
+            assignNextTurn(nextPlayerId);
+        }
     }
 
     private void assignNextTurn(int id) {
         if (id == players.size()){
+            players.get(0).setAttackable(true);
             players.get(0).setActiveTurn(true);
             dealCard(players.get(0));
         } else {
             players.get(id).setActiveTurn(true);
+            players.get(id).setAttackable(true);
             dealCard(players.get(id));
+        }
+    }
+
+    private boolean checkRoundOver() {
+        if (this.deck.getNumberOfCards() == 0) return true;
+
+        int numberOfRemainingPlayers = 0;
+
+        for (Player player : this.players){
+            if (!player.isKnockedOut()){
+                numberOfRemainingPlayers ++;
+            }
+        }
+
+        return numberOfRemainingPlayers == 1;
+    }
+
+    public void endRound() {
+        this.roundOver = true;
+        this.numberOfRounds++;
+
+        Player soleWinningPlayer = new Player("temp");
+        int numberOfRemainingPlayers = 0;
+        for (Player player : this.players){
+            if (!player.isKnockedOut()) numberOfRemainingPlayers ++;
+            soleWinningPlayer = player;
+        }
+
+        if (numberOfRemainingPlayers == 1) {
+            incrementPlayerWins(soleWinningPlayer);
+        } else {
+            for (Player player : findRoundWinner()){
+                incrementPlayerWins(player);
+            }
         }
     }
 }
