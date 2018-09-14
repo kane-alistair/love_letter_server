@@ -41,4 +41,11 @@ public class WebSocketController {
         game.playerTakeTurn(id, card, guess, selected);
         return game;
     }
+
+    @SendTo("/topic/game")
+    @MessageMapping(value = "/remove-player")
+    public Game removePlayer(int playerId){
+        game.removePlayer(playerId);
+        return game;
+    }
 }
