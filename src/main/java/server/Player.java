@@ -1,17 +1,36 @@
-package components;
+package server;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.*;
+import org.springframework.stereotype.Component;
+import org.springframework.web.context.WebApplicationContext;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Player {
+    private static AtomicInteger idGenerator = new AtomicInteger(0);
+    private int externalId;
     private String name;
     private Integer hand[];
     private ArrayList<Integer> discardPile;
     private boolean knockedOut;
     private HashMap<Player, Integer> seenCards;
     private boolean attackable;
+    private boolean activeTurn;
+
+    public Player() {
+        this.externalId = idGenerator.incrementAndGet();
+        this.hand = new Integer[2];
+        this.discardPile = new ArrayList<>();
+        this.knockedOut = false;
+        this.seenCards = new HashMap<>();
+        this.attackable = true;
+    }
 
     public Player(String name) {
+        this.externalId = idGenerator.incrementAndGet();
         this.name = name;
         this.hand = new Integer[2];
         this.discardPile = new ArrayList<>();
@@ -37,6 +56,13 @@ public class Player {
     public int getHandCount() {
         return this.hand.length;
     }
+    public int getExternalId() { return externalId; }
+    public boolean isActiveTurn() { return activeTurn; }
+
+
+    public void setAttackable(boolean attackable) {
+        this.attackable = attackable;
+    }
 
     public int heldCard(){
         if (this.hand[0] != null){
@@ -44,6 +70,8 @@ public class Player {
         }
         return this.hand[1];
     }
+
+    public void setActiveTurn(boolean activeTurn) { this.activeTurn = activeTurn; }
 
     public int discardPileLength(){
         return this.discardPile.size();
@@ -133,6 +161,7 @@ public class Player {
     public void roundRestart(){
         this.knockedOut = false;
         removeHeldCard();
+        this.activeTurn = false;
         this.discardPile.clear();
         this.seenCards.clear();
         this.attackable = true;
@@ -140,5 +169,9 @@ public class Player {
 
     public void protect() {
         this.attackable = false;
+    }
+
+    public void removeProtection() {
+        this.attackable = true;
     }
 }

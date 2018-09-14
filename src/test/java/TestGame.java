@@ -1,6 +1,6 @@
-import components.Deck;
-import components.Game;
-import components.Player;
+import server.Deck;
+import server.Game;
+import server.Player;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -10,30 +10,33 @@ import static org.junit.Assert.assertEquals;
 
 public class TestGame {
     private Game game1;
+    private Deck deck1;
     private Player player1;
     private Player player2;
     private Player player3;
-    private Player[] players;
-    private Deck deck1;
 
     @Before
-    public void setUp() throws Exception {
-        player1 = new Player("Bob");
-        player2 = new Player("Vic");
-        player3 = new Player("Joe");
-        players = new Player[3];
-        players[0] = player1;
-        players[1] = player2;
-        players[2] = player3;
-
+    public void setUp() {
         deck1 = new Deck();
         deck1.prepStdDeck();
-        game1 = new Game(deck1, players);
+        game1 = new Game();
+        player1 = new Player("Bob");
+        player2 = new Player("Jan");
+        player3 = new Player("Mop");
+        game1.add(player1);
+        game1.add(player2);
+        game1.add(player3);
     }
 
     @Test
     public void shouldStartWithThreePlayers() {
         assertEquals(3, game1.getNumberOfPlayers());
+    }
+
+    @Test
+    public void shouldBeAbleToAddPlayers() {
+        game1.add(new Player("Temp"));
+        assertEquals(4, game1.getNumberOfPlayers());
     }
 
     @Test
@@ -45,7 +48,7 @@ public class TestGame {
     public void shouldBeAbleToAssignARoundWin() {
         game1.incrementPlayerWins(player1);
         HashMap<Player, Integer> expected = new HashMap<>();
-        expected.put(player1, 1);
+        expected.put(game1.getPlayers().get(0), 1);
         assertEquals(expected, game1.getWins());
     }
 
@@ -74,12 +77,12 @@ public class TestGame {
 
     @Test
     public void shouldBeAbleToAssignWinToWinnerAtEndOfRound() {
-        player1.addCard(3);
-        player2.addCard(5);
-        player3.addCard(8);
+        player1.addCard(8);
+        player2.addCard(2);
+        player3.addCard(1);
         game1.endRound();
         assertEquals(1, game1.currentWinner().size());
-        assertEquals(player3, game1.currentWinner().get(0));
+        assertEquals(player1, game1.currentWinner().get(0));
     }
 
     @Test
